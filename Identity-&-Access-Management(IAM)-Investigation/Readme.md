@@ -474,8 +474,8 @@ Interpretation: This provides context for administrative activity during the inv
 
 ### Evidence
 
-![Privileged Access / Sudo](PrivilegedAccess/Sudo1.png)
-![Privileged Access / Sudo](PrivilegedAccess/Sudo2.png)
+![Privileged Access / Sudo](PrivilegedAccessOrSudo1.png)
+![Privileged Access / Sudo](PrivilegedAccessOrSudo2.png)
 
 **Step 4 conclusion:** The sudo configuration passed syntax validation. No unexpected additional sudo policy file was identified. The primary account nevertheless has unrestricted administrative privileges.
 
