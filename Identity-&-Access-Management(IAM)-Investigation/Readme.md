@@ -171,6 +171,8 @@ The `99999` maximum age is effectively an extremely long password lifetime.
 
 ### Evidence
 
+![IAM Baseline](IAM_Baseline.png)
+
 **Step 1 conclusion:** The `parallels` account is the primary interactive user and has broad administrative privileges. Its password-aging configuration requires further review.
 
 ---
@@ -290,6 +292,9 @@ Interpretation: The privileged account does not have a meaningful password-expir
 
 ### Evidence
 
+![User Account Inventory](UserAccountInventory1.png)
+![User Account Inventory](UserAccountInventory2.png)
+
 **Step 2 conclusion:** No additional unexpected human-style account was identified. The non-expiring privileged account remains a configuration weakness.
 
 ---
@@ -379,6 +384,9 @@ Observed memberships matched the previously collected account baseline.
 
 ### Evidence
 
+![Group & Role Membership](Groups&RoleMemberships1.png)
+![Group & Role Membership](Groups&RoleMembership2.png)
+
 **Step 3 conclusion:** No unexpected privileged group membership was identified. The main administrative group membership belongs to the primary lab account.
 
 ---
@@ -465,6 +473,9 @@ Purpose: Queries journal entries associated with the `sudo` process for the spec
 Interpretation: This provides context for administrative activity during the investigation. It does not guarantee that every sudo invocation is recorded in the queried journal, and the investigator's own sudo commands may appear in the results.
 
 ### Evidence
+
+![Privileged Access / Sudo](PrivilegedAccess/Sudo1.png)
+![Privileged Access / Sudo](PrivilegedAccess/Sudo2.png)
 
 **Step 4 conclusion:** The sudo configuration passed syntax validation. No unexpected additional sudo policy file was identified. The primary account nevertheless has unrestricted administrative privileges.
 
@@ -685,6 +696,11 @@ Interpretation: This query did not return GDM journal records. It must not be in
 
 ### Evidence
 
+![Authentication & Login Control](Authentication&LoginControls1.png)
+![Authentication & Login Control](Authentication&LoginControl2.png)
+![Authentication & Login Control](Authentication&LoginControl3.png)
+![Authentication & Login Control](Authentication&LoginControl4.png)
+
 **Step 5 conclusion:** Five local graphical authentication failures require context but do not prove an attack. The SSH server executable and expected service unit were unavailable, and no port 22 listener was observed in the check performed.
 
 ---
@@ -825,6 +841,8 @@ Interpretation: No active, nonblank configuration line was returned from this fi
 
 ### Evidence
 
+![Password & Account Policies](Password&AccountPolicies.png)
+
 **Step 6 conclusion:** The primary finding is that the privileged account's password has no meaningful expiration requirement. The password-quality module is present, but the effective complexity policy requires further validation.
 
 ---
@@ -950,6 +968,10 @@ Interpretation: No matching files owned by `parallels` were found in the inspect
 
 ### Evidence
 
+![Resource Permissions & ACLs](ResourcePermissions&ACLs1.png)
+![Resource Permissions & ACLs](ResourcePermissions&ACLs2.png)
+![Resource Permissions & ACLs](ResourcePermissions&ACLs3.png)
+
 **Step 7 conclusion:** The inspected file permissions and ACLs showed no obvious anomaly. No suspicious SUID/SGID executable or unexpected `parallels`-owned file was identified in the searched locations.
 
 ---
@@ -1064,6 +1086,10 @@ parallels:1000:/home/parallels:/bin/bash
 Interpretation: The output includes system accounts with service-specific directories. This command does not, on its own, establish that every listed directory exists or is correctly permissioned. Combined with the shell and sudo checks, it supports the conclusion that the selected service identities follow a non-interactive pattern.
 
 ### Evidence
+
+![Services & Application Identities 1](Services&ApplicationIdentities1.png)
+![Services & Application Identities 2](Service&ApplicationIdentities2.png)
+![Services & Application Identities 3](service&ApplicationIdentities3.png)
 
 **Step 8 conclusion:** No obvious service-account privilege anomaly was identified in the accounts reviewed. Dedicated identities had non-interactive shells and no sudo rules were displayed by the checks performed.
 
@@ -1195,6 +1221,9 @@ Observed result: `docker group not present`.
 Interpretation: The group lookup failed and the fallback message was displayed. No `docker` group was present in the configured group database at the time of inspection.
 
 ### Evidence
+
+![IAM Security Assessment 1](IAM_SecurityAssessment1.png)
+![IAM Security Assessment 2](IAM_SecurityAssessment2.png)
 
 **Step 9 conclusion:** The final privilege snapshot did not identify an alternate UID 0 account or an unexpected sudo-group member. The primary user is the sole listed sudo member and should be treated as a privileged administrative identity.
 
